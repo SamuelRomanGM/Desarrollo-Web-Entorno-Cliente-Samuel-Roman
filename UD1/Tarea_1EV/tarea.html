@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="tarea.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <h1>Mesa de BlackJack</h1>
+    <h2>Reglas:</h2>
+    <ul>
+        <li>Ganará el jugador que más se acerque a 21 sin pasarse</li>
+        <li>Los puntos de las cartas son los siguientes:
+            <ul>
+                <li>Cartas numéricas: su valor nominal (2-10)</li>
+                <li>Figuras (J, Q, K): 11 puntos</li>
+                <li>(A): 1 punto, se obvia el doble valor</li>
+            </ul>
+        </li>
+        <li>Si un jugador supera los 21 puntos, pierde automáticamente</li>
+    </ul>
+    <h3>Dealer</h3>
+    <div id="Dealer"></div>
+    <div id="cartasDLR"></div>
+    <div id="puntosDLR"></div>
+    <h3>Jugador</h3>
+    <div id="Jugador"></div>
+    <div id="cartasJDR"></div>
+    <div id="puntosJDR"></div>
+    <button id="btnPedir">Pedir Carta</button>
+    <button id="btnPlantarse">Plantarse</button>
+
+    <div id="resultado"></div>
+</body>
+</html>
