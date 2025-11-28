@@ -18,6 +18,10 @@ let puntosDLR = 0;
 let cartasJDR = [];
 let puntosJDR = 0;
 
+bienvenidaJugador();
+repartirCartaDealer();
+repartirCartaJugador();
+
 function bienvenidaJugador() {
     let nombreUsuario = prompt("¿Cuál es tu nombre?");
     alert(`¡Bienvenido ${nombreUsuario}!`);
@@ -26,10 +30,27 @@ function bienvenidaJugador() {
 function repartirCartaDealer() {   
     cartasDLR.push(cartas[Math.floor(Math.random() * 13) + 1]);
     puntosDLR += cartasDLR[cartasDLR.length - 1].valor;
-    document.getElementById("cartasDLR").innerHTML = `<h2>Cartas Dealer: </h2> ${cartasDLR}`;
+    mostrarCartasDLR();
     document.getElementById("puntosDLR").innerHTML = `<h2>Puntos Dealer: </h2> ${puntosDLR}`;
 }
 function repartirCartaJugador() {   
+    cartasJDR.push(cartas[Math.floor(Math.random() * 13) + 1]);
+    puntosJDR += cartasJDR[cartasJDR.length - 1].valor;
+    document.getElementById("puntosJDR").innerHTML = `<h2>Puntos Jugador: </h2> ${puntosJDR}`;
+    cartasJDR.push(cartas[Math.floor(Math.random() * 13) + 1]);
+    puntosJDR += cartasJDR[cartasJDR.length - 1].valor;
+    mostrarCartasJDR();
+    document.getElementById("puntosJDR").innerHTML = `<h2>Puntos Jugador: </h2> ${puntosJDR}`;
+}
+function mostrarCartasDLR() {   
+    for (let i = 0; i < cartasDLR.length; i++) {
+        document.getElementById("cartasDLR").innerHTML += ` ${cartasDLR[i].carta} `;
+    }
+}
+function mostrarCartasJDR() {  
+    for (let i = 0; i < cartasJDR.length; i++) {
+        document.getElementById("cartasJDR").innerHTML += ` ${cartasJDR[i].carta} `;
+    } 
 }
 function pedirCarta() {   
 }
