@@ -20,7 +20,9 @@ let puntosJDR = 0;
 
 bienvenidaJugador();
 repartirCartaDealer();
-repartirCartaJugador();
+repartirCartasJugador();
+document.getElementById("btnPedir").addEventListener("click", pedirCarta);
+document.getElementById("btnPlantarse").addEventListener("click", plantarse);
 
 function bienvenidaJugador() {
     let nombreUsuario = prompt("¿Cuál es tu nombre?");
@@ -31,30 +33,51 @@ function repartirCartaDealer() {
     cartasDLR.push(cartas[Math.floor(Math.random() * 13) + 1]);
     puntosDLR += cartasDLR[cartasDLR.length - 1].valor;
     mostrarCartasDLR();
-    document.getElementById("puntosDLR").innerHTML = `<h2>Puntos Dealer: </h2> ${puntosDLR}`;
+    document.getElementById("puntosDLR").innerHTML = `<h3>Puntos Dealer: </h3> ${puntosDLR}`;
 }
-function repartirCartaJugador() {   
-    cartasJDR.push(cartas[Math.floor(Math.random() * 13) + 1]);
-    puntosJDR += cartasJDR[cartasJDR.length - 1].valor;
-    document.getElementById("puntosJDR").innerHTML = `<h2>Puntos Jugador: </h2> ${puntosJDR}`;
+function repartirCartasJugador() {   
     cartasJDR.push(cartas[Math.floor(Math.random() * 13) + 1]);
     puntosJDR += cartasJDR[cartasJDR.length - 1].valor;
     mostrarCartasJDR();
-    document.getElementById("puntosJDR").innerHTML = `<h2>Puntos Jugador: </h2> ${puntosJDR}`;
+    document.getElementById("puntosJDR").innerHTML = `<h3>Puntos Jugador: </h3> ${puntosJDR}`;
 }
 function mostrarCartasDLR() {   
+    document.getElementById("cartasDLR").innerHTML = "";
     for (let i = 0; i < cartasDLR.length; i++) {
         document.getElementById("cartasDLR").innerHTML += ` ${cartasDLR[i].carta} `;
     }
 }
 function mostrarCartasJDR() {  
+    document.getElementById("cartasJDR").innerHTML = "";
     for (let i = 0; i < cartasJDR.length; i++) {
         document.getElementById("cartasJDR").innerHTML += ` ${cartasJDR[i].carta} `;
     } 
 }
 function pedirCarta() {   
+    cartasJDR.push(cartas[Math.floor(Math.random() * 13) + 1]);
+    puntosJDR += cartasJDR[cartasJDR.length - 1].valor;
+    document.getElementById("puntosJDR").innerHTML = `<h3>Puntos Jugador: </h3> ${puntosJDR}`;
+    mostrarCartasJDR();
+        if (puntosJDR > 21) {
+        resultado();
+    }
 }
-function plantarse() {   
+function plantarse() {  
+    while (puntosDLR < 17) {
+        repartirCartaDealer();
+    } 
+    resultado();
 }
 function resultado() {   
+    if (puntosJDR > 21) {
+        alert("¡Te has pasado de 21! ¡Gana el Dealer!");
+    } else if (puntosDLR > 21) {
+        alert("¡El Dealer se ha pasado de 21! ¡Ganas tú!");
+    } else if (puntosJDR > puntosDLR) {
+        alert("¡Ganas tú!");
+    } else if (puntosJDR < puntosDLR) {
+        alert("¡Gana el Dealer!");
+    } else {
+        alert("¡Empate!");
+    }
 }
