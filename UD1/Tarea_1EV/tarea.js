@@ -33,19 +33,25 @@ function repartirCartaDealer() {
     cartasDLR.push(cartas[Math.floor(Math.random() * 13) + 1]);
     puntosDLR += cartasDLR[cartasDLR.length - 1].valor;
     mostrarCartasDLR();
-    document.getElementById("puntosDLR").innerHTML = `<h3>Puntos Dealer: </h3> ${puntosDLR}`;
+    mostrarPuntosDLR();
 }
 function repartirCartasJugador() {   
     cartasJDR.push(cartas[Math.floor(Math.random() * 13) + 1]);
     puntosJDR += cartasJDR[cartasJDR.length - 1].valor;
     mostrarCartasJDR();
-    document.getElementById("puntosJDR").innerHTML = `<h3>Puntos Jugador: </h3> ${puntosJDR}`;
+    mostrarPuntosJDR();
 }
 function mostrarCartasDLR() {   
     document.getElementById("cartasDLR").innerHTML = "";
     for (let i = 0; i < cartasDLR.length; i++) {
         document.getElementById("cartasDLR").innerHTML += ` ${cartasDLR[i].carta} `;
     }
+}
+function mostrarPuntosDLR() {  
+    document.getElementById("puntosDLR").innerHTML = `<h3>Puntos Dealer: </h3> ${puntosDLR}`;
+}
+function mostrarPuntosJDR() {  
+    document.getElementById("puntosJDR").innerHTML = `<h3>Puntos Jugador: </h3> ${puntosJDR}`;
 }
 function mostrarCartasJDR() {  
     document.getElementById("cartasJDR").innerHTML = "";
@@ -56,17 +62,22 @@ function mostrarCartasJDR() {
 function pedirCarta() {   
     cartasJDR.push(cartas[Math.floor(Math.random() * 13) + 1]);
     puntosJDR += cartasJDR[cartasJDR.length - 1].valor;
-    document.getElementById("puntosJDR").innerHTML = `<h3>Puntos Jugador: </h3> ${puntosJDR}`;
+    mostrarPuntosJDR();
     mostrarCartasJDR();
-        if (puntosJDR > 21) {
-        resultado();
+    if (puntosJDR > 21) {
+         setTimeout(resultado, 500);
+    }
+}
+function turnoDealer() {   
+    if (puntosDLR < 17) {
+        repartirCartaDealer();
+        setTimeout(turnoDealer, 1000);
+    }else {
+        setTimeout(resultado, 500);
     }
 }
 function plantarse() {  
-    while (puntosDLR < 17) {
-        repartirCartaDealer();
-    } 
-    resultado();
+    setTimeout(turnoDealer, 500);
 }
 function resultado() {   
     if (puntosJDR > 21) {
@@ -81,3 +92,4 @@ function resultado() {
         alert("¡Empate!");
     }
 }
+
